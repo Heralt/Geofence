@@ -6,4 +6,9 @@
     <string name="not_initialized">default</string>
     <string name="in_geofence_area">Inside geofence area</string>
     <string name="not_in_geofence_area">Not inside geofence area</string>
+    <string name="wifi_network_name">Wifi network name</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="radius">Radius</string>
+
 </resources>

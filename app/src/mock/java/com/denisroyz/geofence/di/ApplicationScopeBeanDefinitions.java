@@ -9,5 +9,6 @@ public class ApplicationScopeBeanDefinitions {
     public void inject(DIContext diContext){
         diContext.addBeanDefinition(new GeofenceManagerBeanDefinition());
         diContext.addBeanDefinition(new GeofenceReceiverBeanDefinition());
+        diContext.addBeanDefinition(new GeofenceRuleRepositoryBeanDefinition());
     }
 }

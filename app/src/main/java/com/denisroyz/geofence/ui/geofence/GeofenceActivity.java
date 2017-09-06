@@ -7,13 +7,16 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.denisroyz.geofence.R;
+import com.denisroyz.geofence.model.GPSRule;
+import com.denisroyz.geofence.model.WifiRule;
 
 public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
 
-    GeofencePresenterImpl mGeofencePresenter;
+    GeofencePresenter mGeofencePresenter;
 
     ToggleButton toggleButton;
     TextView statusTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,7 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
 
     private void bindViews(){
         statusTextView = (TextView) findViewById(R.id.status_text_view);
-        toggleButton = (ToggleButton) findViewById(R.id.geofence_toggle_sensors);
+        toggleButton = (ToggleButton) findViewById(R.id.geofence_sensors_toggle);
         toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,5 +49,10 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
     @Override
     public void displayGeofenceStatus(boolean geoFenceStatus) {
         statusTextView.setText(geoFenceStatus?R.string.in_geofence_area:R.string.not_in_geofence_area);
+    }
+
+    @Override
+    public void displayRulesPicker(GPSRule gpsRule, WifiRule wifiRule) {
+
     }
 }
