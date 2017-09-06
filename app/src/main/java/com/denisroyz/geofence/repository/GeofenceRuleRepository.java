@@ -10,7 +10,7 @@ import com.denisroyz.geofence.model.WifiRule;
 public interface GeofenceRuleRepository {
 
     GPSRule getGpsRule();
-    void saveGpsRule(GPSRule gpsRule);
+    boolean saveGpsRule(GPSRule gpsRule);
     WifiRule getWifiRule();
-    void saveWifiRule(WifiRule wifiRule);
+    boolean saveWifiRule(WifiRule wifiRule);
 }

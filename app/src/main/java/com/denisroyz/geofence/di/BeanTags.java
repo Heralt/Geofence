@@ -10,4 +10,5 @@ public class BeanTags {
     public static final String GEOFENCE_MANAGER = "geofence_manager";
     public static final String GEOFENCE_RECEIVER = "geofence_receiver";
     public static final String RULES_REPOSITORY = "geofence_rule_repository";
+    public static final String OBJECT_SERIALIZER = "object_serializer";
 }

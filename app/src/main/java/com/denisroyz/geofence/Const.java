@@ -6,13 +6,18 @@ package com.denisroyz.geofence;
 
 public class Const {
 
+
+    public interface PREFS {
+        String PREFS_GEOFENCE_RULE = "com.denisroyz.geofence.rule.prefs";
+        
+    }
     public interface ACTION {
-        public static String MAIN_ACTION = "com.denisroyz.geofence.action.main";
-        public static String START_FOREGROUND_ACTION = "com.denisroyz.geofence.action.startforeground";
-        public static String STOP_FOREGROUND_ACTION = "com.denisroyz.geofence.action.stopforeground";
+        String MAIN_ACTION = "com.denisroyz.geofence.action.main";
+        String START_FOREGROUND_ACTION = "com.denisroyz.geofence.action.startforeground";
+        String STOP_FOREGROUND_ACTION = "com.denisroyz.geofence.action.stopforeground";
     }
 
     public interface NOTIFICATION_ID {
-        public static int FOREGROUND_SERVICE = 101;
+        int FOREGROUND_SERVICE = 101;
     }
 }
