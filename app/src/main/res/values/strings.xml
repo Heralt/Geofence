@@ -4,4 +4,6 @@
     <string name="configuration">configuration</string>
     <string name="sensors_enabled">SensorsEnabled</string>
     <string name="not_initialized">default</string>
+    <string name="in_geofence_area">Inside geofence area</string>
+    <string name="not_in_geofence_area">Not inside geofence area</string>
 </resources>

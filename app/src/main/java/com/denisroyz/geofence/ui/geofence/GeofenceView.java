@@ -5,4 +5,5 @@ package com.denisroyz.geofence.ui.geofence;
  */
 
 public interface GeofenceView {
+    void displayGeofenceStatus(boolean geoFenceStatus);
 }

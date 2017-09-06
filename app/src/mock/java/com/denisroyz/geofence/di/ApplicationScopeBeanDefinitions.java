@@ -7,7 +7,7 @@ package com.denisroyz.geofence.di;
 public class ApplicationScopeBeanDefinitions {
 
     public void inject(DIContext diContext){
-        GeofenceManagerBeanDefinition geofenceManagerBeanDefinition = new GeofenceManagerBeanDefinition();
-        diContext.addBeanDefinition(geofenceManagerBeanDefinition);
+        diContext.addBeanDefinition(new GeofenceManagerBeanDefinition());
+        diContext.addBeanDefinition(new GeofenceReceiverBeanDefinition());
     }
 }

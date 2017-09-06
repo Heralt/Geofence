@@ -1,4 +1,4 @@
-package com.denisroyz.geofence.geo;
+package com.denisroyz.geofence.service;
 
 import android.content.Context;
 import android.content.Intent;

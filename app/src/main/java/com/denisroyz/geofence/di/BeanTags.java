@@ -8,4 +8,5 @@ public class BeanTags {
 
     public static final String CONTEXT = "context";
     public static final String GEOFENCE_MANAGER = "geofence_manager";
+    public static final String GEOFENCE_RECEIVER = "geofence_receiver";
 }

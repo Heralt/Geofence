@@ -3,16 +3,17 @@ package com.denisroyz.geofence.ui.geofence;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.denisroyz.geofence.R;
 
-public class GeofenceActivity extends AppCompatActivity {
+public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
 
     GeofencePresenterImpl mGeofencePresenter;
 
     ToggleButton toggleButton;
-
+    TextView statusTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +21,15 @@ public class GeofenceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_geofence);
         initDependencies();
         bindViews();
+        mGeofencePresenter.fillView();
     }
 
     private void initDependencies(){
-        mGeofencePresenter = new GeofencePresenterImpl();
+        mGeofencePresenter = new GeofencePresenterImpl(this);
     }
 
     private void bindViews(){
+        statusTextView = (TextView) findViewById(R.id.status_text_view);
         toggleButton = (ToggleButton) findViewById(R.id.geofence_toggle_sensors);
         toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,5 +41,10 @@ public class GeofenceActivity extends AppCompatActivity {
 
     private void onToggleButtonClick(){
         mGeofencePresenter.enableSearch(toggleButton.isChecked());
+    }
+
+    @Override
+    public void displayGeofenceStatus(boolean geoFenceStatus) {
+        statusTextView.setText(geoFenceStatus?R.string.in_geofence_area:R.string.not_in_geofence_area);
     }
 }

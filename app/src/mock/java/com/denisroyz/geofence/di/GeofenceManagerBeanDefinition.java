@@ -2,7 +2,7 @@ package com.denisroyz.geofence.di;
 
 import android.content.Context;
 
-import com.denisroyz.geofence.geo.GeofenceManager;
+import com.denisroyz.geofence.service.GeofenceManager;
 
 /**
  * Created by Heralt on 06.09.2017.

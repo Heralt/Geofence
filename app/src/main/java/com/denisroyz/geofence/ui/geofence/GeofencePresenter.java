@@ -6,4 +6,10 @@ package com.denisroyz.geofence.ui.geofence;
 
 public interface GeofencePresenter {
     void enableSearch(boolean selected);
+
+    void fillView();
+
+    void subscribe();
+
+    void unSubscribe();
 }
