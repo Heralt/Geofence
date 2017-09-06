@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.denisroyz.geofence.ui.geofence.GeofenceActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:id="@+id/geofence_status_view"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <ToggleButton
+            android:id="@+id/geofence_toggle_sensors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sensors_enabled" />
+        <TextView
+            android:layout_margin="6dp"
+            android:id="@+id/status_text_view"
+            android:layout_width="match_parent"
+            android:text="@string/not_initialized"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/colorAccent"
+        android:layout_below="@id/geofence_status_view"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>
