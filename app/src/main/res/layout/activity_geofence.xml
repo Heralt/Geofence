@@ -23,58 +23,62 @@
             android:text="@string/not_initialized"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_below="@id/geofence_status_view"
-        android:layout_height="wrap_content">
-        <Button
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:id="@+id/geofence_configuration_save_button"
-            android:enabled="true"
-            android:text="@string/save"
-            android:layout_height="wrap_content" />
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="wrap_content">
-            <EditText
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/wifi_network_name"
-                android:id="@+id/geofence_configuration_wifi_name_et"
-                android:inputType="textPersonName" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <EditText
+                android:id="@+id/geofence_configuration_save_button"
+                android:enabled="true"
+                android:text="@string/save"
+                android:layout_height="wrap_content" />
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/latitude"
-                android:id="@+id/geofence_configuration_gps_lat"
-                android:inputType="textPersonName" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/wifi_network_name"
+                    android:id="@+id/geofence_configuration_wifi_name_et"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/longitude"
-                android:id="@+id/geofence_configuration_gps_lon"
-                android:inputType="textPersonName" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
+                android:layout_height="match_parent">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/latitude"
+                    android:id="@+id/geofence_configuration_gps_lat"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/radius"
-                android:id="@+id/geofence_configuration_gps_radius"
-                android:inputType="textPersonName" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/longitude"
+                    android:id="@+id/geofence_configuration_gps_lon"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/radius"
+                    android:id="@+id/geofence_configuration_gps_radius"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.denisroyz.geofence.repository;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.denisroyz.geofence.Const;
 import com.denisroyz.geofence.model.GPSRule;
@@ -37,15 +38,18 @@ public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
     @Override
     public GPSRule getGpsRule() {
         //TODO rework default object
-        Object object = readPref(GPS_RULE_KEY, new GPSRule());
-        return (GPSRule) object;
+
+        Object object = readPref(GPS_RULE_KEY);
+        if (object!=null && object instanceof GPSRule) return (GPSRule) object;
+        return new GPSRule();
     }
 
     @Override
     public WifiRule getWifiRule() {
         //TODO rework default object
-        Object object = readPref(WIFI_RULE_KEY, new WifiRule());
-        return (WifiRule) object;
+        Object object = readPref(WIFI_RULE_KEY);
+        if (object!=null && object instanceof WifiRule) return (WifiRule) object;
+        return new WifiRule();
     }
 
     @Override
@@ -58,14 +62,22 @@ public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
         return savePrefs(wifiRule, WIFI_RULE_KEY);
     }
 
-    private Object readPref(String key, Object defaultObject){
+    /**
+     * @param key, under which object is stored in sharedPrefs
+     * @return Object, stored in {@link #sharedPreferences} under {@param key},
+     * or null, if no object found, or any exception occurred.
+     */
+    private Object readPref(String key){
         try {
-            String serialized = sharedPreferences.getString(GPS_RULE_KEY, null);
-            if (serialized==null) return defaultObject;
+            String serialized = sharedPreferences.getString(key, null);
+            if (serialized==null) return null ;
             return objectSerializer.readFromString(serialized);
         } catch (IOException | ClassNotFoundException e) {
             Log.w(LOG_TAG, String.format("Can not load object. key: %s", key), e);
-            return defaultObject;
+            return null;
+        } catch (Exception e){
+            Log.e(LOG_TAG, String.format("Can not load object. key: %s", key), e);
+            return null;
         }
     }
 
@@ -78,7 +90,10 @@ public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
                     .apply();
             return true;
         } catch (IOException e) {
-            Log.w(LOG_TAG, String.format("Can not save object. key: %s", key));
+            Log.w(LOG_TAG, String.format("Can not save object. key: %s", key), e);
+            return false;
+        } catch (Exception e){
+            Log.e(LOG_TAG, String.format("Can not save object. key: %s", key), e);
             return false;
         }
     }

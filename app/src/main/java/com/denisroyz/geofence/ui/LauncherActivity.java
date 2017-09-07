@@ -15,5 +15,6 @@ public class LauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         Intent intent = new Intent(this, GeofenceActivity.class);
         startActivity(intent);
+        finish();
     }
 }

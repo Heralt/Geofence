@@ -3,6 +3,8 @@ package com.denisroyz.geofence.ui.geofence;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,10 +17,12 @@ import com.denisroyz.geofence.model.WifiRule;
 import com.denisroyz.geofence.validation.GPSRuleObjectValidator;
 import com.denisroyz.geofence.validation.ObjectValidatorError;
 import com.denisroyz.geofence.validation.ObjectValidatorResult;
+import com.denisroyz.geofence.validation.WifiRuleObjectValidator;
 
 public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
 
     GPSRuleObjectValidator gpsRuleObjectValidator;
+    WifiRuleObjectValidator wifiRuleObjectValidator;
     GeofencePresenter mGeofencePresenter;
 
     ToggleButton toggleButton;
@@ -44,6 +48,7 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
     private void initDependencies(){
         mGeofencePresenter = new GeofencePresenterImpl(this);
         gpsRuleObjectValidator = new GPSRuleObjectValidator();
+        wifiRuleObjectValidator = new WifiRuleObjectValidator();
     }
 
     private void bindViews(){
@@ -66,27 +71,61 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
                 onSaveConfigurationButtonClick();
             }
         });
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                onConfigurationTextChange();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+        gpsLatitudeRuleEditText.addTextChangedListener(textWatcher);
+        gpsLongitudeRuleEditText.addTextChangedListener(textWatcher);
+        gpsRadiusRuleEditText.addTextChangedListener(textWatcher);
+        wifiNetworkNameRuleEditText.addTextChangedListener(textWatcher);
+
+    }
+
+    private void onConfigurationTextChange(){
+        saveConfigurationButton.setEnabled(true);
     }
 
     private void onSaveConfigurationButtonClick(){
         ObjectValidatorResult<GPSRule> gpsRule = readGPSRule();
-        if (gpsRule.isValid()){
+        ObjectValidatorResult<WifiRule> wifiRule = readWifiRule();
+        if (gpsRule.isValid()&&wifiRule.isValid()){
             saveConfigurationButton.setEnabled(false);
+            mGeofencePresenter.save(gpsRule.getObject());
+            mGeofencePresenter.save(wifiRule.getObject());
         }
     }
 
 
+    private ObjectValidatorResult<WifiRule> readWifiRule(){
+        WifiRule wifiRule = new WifiRule();
+        if (!wifiNetworkNameRuleEditText.getText().toString().isEmpty())
+            wifiRule.setWifiNetworkName(wifiNetworkNameRuleEditText.getText().toString());
+        ObjectValidatorResult<WifiRule> validatedWifiRule = wifiRuleObjectValidator.validateObject(this, wifiRule);
+        processValidationError(wifiNetworkNameRuleEditText, validatedWifiRule.getError(WifiRuleObjectValidator.FIELD_NETWORK_NAME));
+        return validatedWifiRule;
+    }
+
     private ObjectValidatorResult<GPSRule> readGPSRule(){
         GPSRule gpsRule = new GPSRule();
-        if (!gpsLatitudeRuleEditText.getText().toString().isEmpty()) {
+        if (!gpsLatitudeRuleEditText.getText().toString().isEmpty())
             gpsRule.setLat( Double.parseDouble(gpsLatitudeRuleEditText.getText().toString()));
-        }
-        if (!gpsLongitudeRuleEditText.getText().toString().isEmpty()) {
+        if (!gpsLongitudeRuleEditText.getText().toString().isEmpty())
             gpsRule.setLon( Double.parseDouble(gpsLongitudeRuleEditText.getText().toString()));
-        }
-        if (!gpsRadiusRuleEditText.getText().toString().isEmpty()) {
+        if (!gpsRadiusRuleEditText.getText().toString().isEmpty())
             gpsRule.setRadius( Double.parseDouble(gpsRadiusRuleEditText.getText().toString()));
-        }
         ObjectValidatorResult<GPSRule> validatedGPSRule = gpsRuleObjectValidator.validateObject(this, gpsRule);
         processValidationError(gpsLatitudeRuleEditText, validatedGPSRule.getError(GPSRuleObjectValidator.FIELD_LAT));
         processValidationError(gpsLongitudeRuleEditText, validatedGPSRule.getError(GPSRuleObjectValidator.FIELD_LON));

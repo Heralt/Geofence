@@ -3,6 +3,7 @@ package com.denisroyz.geofence.service;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -15,20 +16,22 @@ import java.io.Serializable;
  */
 public class ObjectSerializer {
 
-    public Object readFromString(String serializedObject ) throws IOException,
+    public Object readFromString(String str) throws IOException,
             ClassNotFoundException {
-        byte b[] = serializedObject.getBytes();
+
+        byte b[] = str.getBytes("ISO-8859-1");
         ByteArrayInputStream bi = new ByteArrayInputStream(b);
         ObjectInputStream si = new ObjectInputStream(bi);
         return si.readObject();
     }
 
-    public String writeToString(Serializable o ) throws IOException {
+    public String writeToString(Object obj)throws IOException {
         ByteArrayOutputStream bo = new ByteArrayOutputStream();
         ObjectOutputStream so = new ObjectOutputStream(bo);
-        so.writeObject(o);
+        so.writeObject(obj);
         so.flush();
-        return bo.toString();
+        // This encoding induces a bijection between byte[] and String (unlike UTF-8)
+        return bo.toString("ISO-8859-1");
     }
 
 }

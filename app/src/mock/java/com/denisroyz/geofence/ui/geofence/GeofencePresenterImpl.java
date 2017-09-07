@@ -1,6 +1,7 @@
 package com.denisroyz.geofence.ui.geofence;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.denisroyz.geofence.GeofenceApplication;
 import com.denisroyz.geofence.di.BeanTags;
@@ -61,6 +62,18 @@ public class GeofencePresenterImpl implements GeofencePresenter, GeofenceReceive
     @Override
     public void unSubscribe() {
         geofenceReceiver.removeGeofenceReceiverListener(this);
+    }
+
+    @Override
+    public void save(GPSRule gpsRule) {
+        boolean success = rulesRepository.saveGpsRule(gpsRule);
+        Log.i(LOG_TAG, String.format("Save GPSRule Success: %b", success));
+    }
+
+    @Override
+    public void save(WifiRule wifiRule) {
+        boolean success = rulesRepository.saveWifiRule(wifiRule);
+        Log.i(LOG_TAG, String.format("Save WiFiRule Success: %b", success));
     }
 
     @Override
