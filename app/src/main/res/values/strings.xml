@@ -11,8 +11,9 @@
     <string name="longitude">Longitude</string>
     <string name="radius">Radius</string>
     <string name="save">save</string>
-    <string name="latitude_error">Unexceptable latitude value</string>
-    <string name="longitude_error">Unexceptable longitude value</string>
-    <string name="radius_error">Unexceptable radius value</string>
+    <string name="latitude_error">Unacceptable latitude value</string>
+    <string name="longitude_error">Unacceptable longitude value</string>
+    <string name="radius_error">Unacceptable radius value</string>
+    <string name="wifi_network_name_error">Unacceptable wifi network name</string>
 
 </resources>

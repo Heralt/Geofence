@@ -1,8 +1,5 @@
 package com.denisroyz.geofence.di;
 
-import android.content.Context;
-
-import com.denisroyz.geofence.service.GeofenceManager;
 import com.denisroyz.geofence.service.GeofenceReceiver;
 import com.denisroyz.geofence.service.GeofenceReceiverImpl;
 

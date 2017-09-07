@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/latitude"
                     android:id="@+id/geofence_configuration_gps_lat"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/longitude"
                     android:id="@+id/geofence_configuration_gps_lon"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/radius"
                     android:id="@+id/geofence_configuration_gps_radius"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </ScrollView>

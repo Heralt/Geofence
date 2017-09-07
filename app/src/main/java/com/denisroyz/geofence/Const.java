@@ -7,6 +7,8 @@ package com.denisroyz.geofence;
 public class Const {
 
 
+    public static long UPDATE_FREQ = 1000;
+
     public interface PREFS {
         String PREFS_GEOFENCE_RULE = "com.denisroyz.geofence.rule.prefs";
         
@@ -19,5 +21,8 @@ public class Const {
 
     public interface NOTIFICATION_ID {
         int FOREGROUND_SERVICE = 101;
+    }
+    public interface NOTIFICATION_CHANNEL_ID{
+        String FOREGROUND_SERVICE = "com.denisroyz.geofence.ui.geofence.service_fg";
     }
 }

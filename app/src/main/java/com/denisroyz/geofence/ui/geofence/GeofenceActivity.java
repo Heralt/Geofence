@@ -51,6 +51,19 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
         wifiRuleObjectValidator = new WifiRuleObjectValidator();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGeofencePresenter.subscribe();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mGeofencePresenter.unSubscribe();
+    }
+
     private void bindViews(){
         wifiNetworkNameRuleEditText = findViewById(R.id.geofence_configuration_wifi_name_et);
         gpsLatitudeRuleEditText = findViewById(R.id.geofence_configuration_gps_lat);
@@ -145,10 +158,6 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
         mGeofencePresenter.enableSearch(toggleButton.isChecked());
     }
 
-    @Override
-    public void displayGeofenceStatus(boolean geoFenceStatus) {
-        statusTextView.setText(geoFenceStatus?R.string.in_geofence_area:R.string.not_in_geofence_area);
-    }
 
     @Override
     public void displayRulesPicker(GPSRule gpsRule, WifiRule wifiRule) {
@@ -156,5 +165,14 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView{
         gpsLatitudeRuleEditText.setText(String.valueOf(gpsRule.getLat()));
         gpsLongitudeRuleEditText.setText(String.valueOf(gpsRule.getLon()));
         gpsRadiusRuleEditText.setText(String.valueOf(gpsRule.getRadius()));
+    }
+
+    @Override
+    public void displayGeofenceStatus(boolean geoFenceStatus) {
+        statusTextView.setText(geoFenceStatus?R.string.in_geofence_area:R.string.not_in_geofence_area);
+    }
+    @Override
+    public void displayGeoFenceEnabled(boolean isSearchEnabled) {
+        toggleButton.setChecked(isSearchEnabled);
     }
 }

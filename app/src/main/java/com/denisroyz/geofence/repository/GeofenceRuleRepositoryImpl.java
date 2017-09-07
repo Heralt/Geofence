@@ -3,7 +3,6 @@ package com.denisroyz.geofence.repository;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.denisroyz.geofence.Const;
 import com.denisroyz.geofence.model.GPSRule;
@@ -12,6 +11,10 @@ import com.denisroyz.geofence.service.ObjectSerializer;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -24,6 +27,8 @@ public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
 
     private SharedPreferences sharedPreferences;
     private ObjectSerializer objectSerializer;
+
+    private Set<RuleRepositoryUpdateListener> listeners = new HashSet<>();
 
     private static final String GPS_RULE_KEY = "com.denisroyz.geofence.rule.prefs.gps_rule";
     private static final String WIFI_RULE_KEY = "com.denisroyz.geofence.rule.prefs.wifi_rule";
@@ -53,13 +58,42 @@ public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
     }
 
     @Override
-    public boolean saveGpsRule(GPSRule gpsRule) {
-        return savePrefs(gpsRule, GPS_RULE_KEY);
+    public boolean saveWifiRule(WifiRule wifiRule) {
+        boolean saved =  savePrefs(wifiRule, WIFI_RULE_KEY);
+        if (saved) notifyWifiRuleUpdated(wifiRule);
+        return saved;
     }
 
     @Override
-    public boolean saveWifiRule(WifiRule wifiRule) {
-        return savePrefs(wifiRule, WIFI_RULE_KEY);
+    public boolean saveGpsRule(GPSRule gpsRule) {
+        boolean saved = savePrefs(gpsRule, GPS_RULE_KEY);
+        if (saved) notifyGpsRuleUpdated(gpsRule);
+        return saved;
+    }
+
+    //THIS should be done in other thread
+    private void notifyGpsRuleUpdated(GPSRule gpsRule) {
+        for (RuleRepositoryUpdateListener listener: listeners){
+            listener.onGpsRuleUpdated(gpsRule);
+        }
+
+    }
+
+    //THIS should be done in other thread
+    private void notifyWifiRuleUpdated(WifiRule wifiRule) {
+        for (RuleRepositoryUpdateListener listener: listeners){
+            listener.onWifiRuleUpdated(wifiRule);
+        }
+    }
+
+    @Override
+    public void addOnChangeListener(RuleRepositoryUpdateListener listener) {
+        listeners.add(listener);
+    }
+
+    @Override
+    public void removeOnChangeListener(RuleRepositoryUpdateListener listener) {
+        listeners.remove(listener);
     }
 
     /**

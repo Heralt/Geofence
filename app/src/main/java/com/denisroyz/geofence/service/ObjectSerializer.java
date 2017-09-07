@@ -18,7 +18,7 @@ public class ObjectSerializer {
 
     public Object readFromString(String str) throws IOException,
             ClassNotFoundException {
-
+        // This encoding induces a bijection between byte[] and String (unlike UTF-8)
         byte b[] = str.getBytes("ISO-8859-1");
         ByteArrayInputStream bi = new ByteArrayInputStream(b);
         ObjectInputStream si = new ObjectInputStream(bi);

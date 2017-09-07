@@ -20,6 +20,9 @@ android {
     productFlavors {
         mock {
         }
+        production{
+
+        }
 
     }
 }

@@ -51,7 +51,6 @@ public class GeofencePresenterImpl implements GeofencePresenter, GeofenceReceive
         WifiRule wifiRule = rulesRepository.getWifiRule();
         boolean isGeofenceSearchEnabled = geofenceManager.isEnabled();
         fillGeofenceStatusView(geofenceReceiver.getGeoFenceStatus(), isGeofenceSearchEnabled);
-
         fillRuleConfigurationView(gpsRule, wifiRule);
     }
 

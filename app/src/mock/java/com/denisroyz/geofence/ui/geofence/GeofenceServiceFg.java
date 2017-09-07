@@ -49,7 +49,7 @@ public class GeofenceServiceFg extends Service {
         notificationIntent.setAction(Const.ACTION.MAIN_ACTION);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
-        return new NotificationCompat.Builder(this)
+        return new NotificationCompat.Builder(this, Const.NOTIFICATION_CHANNEL_ID.FOREGROUND_SERVICE)
                 .setContentTitle(content)
                 .setTicker("Geofence is scanning")
                 .setSmallIcon( R.drawable.ic_my_location_black_24dp)

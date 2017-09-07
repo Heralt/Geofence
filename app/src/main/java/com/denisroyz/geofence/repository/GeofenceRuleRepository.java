@@ -13,4 +13,8 @@ public interface GeofenceRuleRepository {
     boolean saveGpsRule(GPSRule gpsRule);
     WifiRule getWifiRule();
     boolean saveWifiRule(WifiRule wifiRule);
+
+
+    void addOnChangeListener(RuleRepositoryUpdateListener listener);
+    void removeOnChangeListener(RuleRepositoryUpdateListener listener);
 }

@@ -11,4 +11,6 @@ public interface GeofenceView {
     void displayGeofenceStatus(boolean geoFenceStatus);
 
     void displayRulesPicker(GPSRule gpsRule, WifiRule wifiRule);
+
+    void displayGeoFenceEnabled(boolean isSearchEnabled);
 }

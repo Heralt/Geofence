@@ -17,7 +17,7 @@ public class WifiRuleObjectValidator implements ObjectValidator<WifiRule> {
     @Override
     public ObjectValidatorResult<WifiRule> validateObject(Context context, WifiRule object) {
         ObjectValidatorResult<WifiRule> objectValidatorResult = new ObjectValidatorResult<>(object);
-        if (!isValidWifiName(object.getWifiNetworkName()))  objectValidatorResult.withError(new ObjectValidatorError(FIELD_NETWORK_NAME,context.getString(R.string.latitude_error)));
+        if (!isValidWifiName(object.getWifiNetworkName()))  objectValidatorResult.withError(new ObjectValidatorError(FIELD_NETWORK_NAME,context.getString(R.string.wifi_network_name_error)));
         return objectValidatorResult;
     }
 

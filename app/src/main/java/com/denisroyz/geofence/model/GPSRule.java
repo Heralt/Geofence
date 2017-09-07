@@ -10,11 +10,11 @@ public class GPSRule implements GeofenceRule, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private double lat;
-    private double lon;
-    private double radius;
+    private Double lat;
+    private Double lon;
+    private Double radius;
 
-    public double getLat() {
+    public Double getLat() {
         return lat;
     }
 
@@ -22,7 +22,7 @@ public class GPSRule implements GeofenceRule, Serializable {
         this.lat = lat;
     }
 
-    public double getLon() {
+    public Double getLon() {
         return lon;
     }
 
@@ -30,7 +30,7 @@ public class GPSRule implements GeofenceRule, Serializable {
         this.lon = lon;
     }
 
-    public double getRadius() {
+    public Double getRadius() {
         return radius;
     }
 
