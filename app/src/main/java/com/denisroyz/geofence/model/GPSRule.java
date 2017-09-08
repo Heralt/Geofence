@@ -14,6 +14,8 @@ public class GPSRule implements GeofenceRule, Serializable {
     private Double lon;
     private Double radius;
 
+
+
     public Double getLat() {
         return lat;
     }
@@ -45,22 +47,17 @@ public class GPSRule implements GeofenceRule, Serializable {
 
         GPSRule gpsRule = (GPSRule) o;
 
-        if (Double.compare(gpsRule.lat, lat) != 0) return false;
-        if (Double.compare(gpsRule.lon, lon) != 0) return false;
-        return Double.compare(gpsRule.radius, radius) == 0;
+        if (lat != null ? !lat.equals(gpsRule.lat) : gpsRule.lat != null) return false;
+        if (lon != null ? !lon.equals(gpsRule.lon) : gpsRule.lon != null) return false;
+        return radius != null ? radius.equals(gpsRule.radius) : gpsRule.radius == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(lat);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(lon);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(radius);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        int result = lat != null ? lat.hashCode() : 0;
+        result = 31 * result + (lon != null ? lon.hashCode() : 0);
+        result = 31 * result + (radius != null ? radius.hashCode() : 0);
         return result;
     }
 }
