@@ -22,6 +22,8 @@ import com.denisroyz.geofence.service.GeofenceReceiver;
 import com.denisroyz.geofence.service.GeofenceReceiverListener;
 import com.denisroyz.geofence.service.GeofenceWiFiManager;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by Heralt on 05.09.2017.
  */
@@ -65,7 +67,11 @@ public class GeofenceServiceFg extends Service implements GeofenceReceiverListen
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        inject();
+        if (intent==null||intent.getAction()==null){
+            String source = null == intent ? "intent" : "action";
+            Log.e (TAG, source + " was null, flags=" + flags + " bits=" + Integer.toBinaryString (flags));
+            return START_STICKY;
+        }
         if (intent.getAction().equals(Const.ACTION.START_FOREGROUND_ACTION)) {
             Log.i(LOG_TAG, "<< Start Foreground Intent ");
             mGeofenceGPSManager.subscribe();

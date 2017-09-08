@@ -18,4 +18,6 @@ public interface GeofencePresenter {
 
     void save(GPSRule gpsRule);
     void save(WifiRule wifiRule);
+
+    void savePermissionState(boolean permissionsGranted);
 }

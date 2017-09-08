@@ -10,10 +10,11 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="radius">Radius</string>
-    <string name="save">save</string>
     <string name="latitude_error">Unacceptable latitude value</string>
     <string name="longitude_error">Unacceptable longitude value</string>
     <string name="radius_error">Unacceptable radius value</string>
     <string name="wifi_network_name_error">Unacceptable wifi network name</string>
+    <string name="location_permission_is_not_granted">To improve geofence accuracy give it location permission. Only wifi is used to check is phone is geofence area while permission is not granted.</string>
+    <string name="geofence_configuration_save">Save new geofence configuration</string>
 
 </resources>
