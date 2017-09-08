@@ -22,7 +22,6 @@
         </activity>
         <activity android:name=".ui.geofence.GeofenceActivity"
             android:launchMode="singleInstance">
-
         </activity>
         <service android:name=".ui.geofence.GeofenceServiceFg">
         </service>

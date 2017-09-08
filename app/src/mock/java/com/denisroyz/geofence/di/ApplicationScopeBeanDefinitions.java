@@ -12,5 +12,8 @@ public class ApplicationScopeBeanDefinitions extends BaseApplicationScopeBeanDef
         diContext.addBeanDefinition(new GeofenceManagerBeanDefinition());
         diContext.addBeanDefinition(new GeofenceReceiverBeanDefinition());
         diContext.addBeanDefinition(new GeofenceRuleRepositoryBeanDefinition());
+        diContext.addBeanDefinition(new CurrentLocationRepositoryBeanDefinition());
+        diContext.addBeanDefinition(new GeofenceWifiManagerBeanDefinition());
+        diContext.addBeanDefinition(new GeofenceGPSManagerBeanDefinition());
     }
 }
