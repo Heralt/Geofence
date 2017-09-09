@@ -7,8 +7,9 @@ import android.view.animation.Transformation;
 
 /**
  * Created by Heralt on 15.11.2016.
+ *
+ * View util, used to perform collapse, expand animations on views.
  */
-
 public class CollapseExpand {
 
     private static final int DURATION = 250;
@@ -16,7 +17,7 @@ public class CollapseExpand {
     public static void expand(final View v) {
         if (v.getVisibility()==View.VISIBLE) return;;
         v.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        final int targtetHeight = v.getMeasuredHeight();
+        final int targetHeight = v.getMeasuredHeight();
 
         v.getLayoutParams().height = 0;
         v.setVisibility(View.VISIBLE);
@@ -25,7 +26,7 @@ public class CollapseExpand {
             protected void applyTransformation(float interpolatedTime, Transformation t) {
                 v.getLayoutParams().height = interpolatedTime == 1
                         ? ViewGroup.LayoutParams.WRAP_CONTENT
-                        : (int)(targtetHeight * interpolatedTime);
+                        : (int)(targetHeight * interpolatedTime);
                 v.requestLayout();
             }
 

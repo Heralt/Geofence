@@ -9,13 +9,12 @@ import com.denisroyz.geofence.dao.WifiRule;
 import com.denisroyz.geofence.repository.GeofenceRuleRepository;
 import com.denisroyz.geofence.service.GeofenceManager;
 import com.denisroyz.geofence.service.GeofenceReceiver;
-import com.denisroyz.geofence.service.GeofenceReceiverListener;
 
 /**
  * Created by Heralt on 05.09.2017.
  */
 
-public class GeofencePresenterImpl implements GeofencePresenter, GeofenceReceiverListener {
+public class GeofencePresenterImpl implements GeofencePresenter, GeofenceReceiver.GeofenceReceiverListener {
 
     public static final String LOG_TAG = "GeofencePresenterImpl";
 

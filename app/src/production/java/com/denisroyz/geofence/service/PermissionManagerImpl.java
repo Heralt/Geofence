@@ -7,8 +7,13 @@ import android.support.v4.app.ActivityCompat;
 
 /**
  * Created by Heralt on 08.09.2017.
+ *
+ * Checks and requests permissions on Android M+
+ *
+ * Requires activity, {@link #requestPermissions} was called on  to provide
+ * {@link android.support.v4.app.FragmentActivity#onRequestPermissionsResult}
+ * result to {@link #validatePermissionResult}
  */
-
 public class PermissionManagerImpl implements PermissionManager {
     private static final String[] PERMISSIONS = new String[] { Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION};

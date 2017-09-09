@@ -19,16 +19,17 @@ import com.denisroyz.geofence.dao.UserLocation;
 import com.denisroyz.geofence.repository.UserLocationRepository;
 import com.denisroyz.geofence.service.GeofenceGPSManager;
 import com.denisroyz.geofence.service.GeofenceReceiver;
-import com.denisroyz.geofence.service.GeofenceReceiverListener;
 import com.denisroyz.geofence.service.GeofenceWiFiManager;
 
 import static android.content.ContentValues.TAG;
 
 /**
  * Created by Heralt on 05.09.2017.
+ *
+ * Foreground service.
+ * Creates notification in notification bar, listens for location updates.
  */
-
-public class GeofenceServiceFg extends Service implements GeofenceReceiverListener {
+public class GeofenceServiceFg extends Service implements GeofenceReceiver.GeofenceReceiverListener {
     private static final String LOG_TAG = "GeofenceServiceFg";
 
     GeofenceWiFiManager mGeofenceWiFiManager;

@@ -9,7 +9,6 @@ import com.denisroyz.geofence.repository.GeofenceRuleRepository;
 import com.denisroyz.geofence.repository.GeofenceRuleRepositoryImpl;
 import com.denisroyz.geofence.service.GeofenceReceiver;
 import com.denisroyz.geofence.service.GeofenceReceiverImpl;
-import com.denisroyz.geofence.service.GeofenceReceiverListener;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -67,7 +66,7 @@ public class GeofenceTest {
         gpsRule.setRadius(radius);
         WifiRule wifiRule = new WifiRule();
         wifiRule.setWifiNetworkName(desiredWifi);
-        geofenceReceiver.addGeofenceReceiverListener(new GeofenceReceiverListener() {
+        geofenceReceiver.addGeofenceReceiverListener(new GeofenceReceiver.GeofenceReceiverListener() {
             @Override
             public void onGeofenceStatusUpdated(boolean inside) {
 

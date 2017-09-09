@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -14,8 +15,10 @@ import java.util.List;
 
 /**
  * Created by Heralt on 07.09.2017.
+ *
+ * Provides GPS location information, using android {@link LocationManager}
+ * Uses both {@link LocationManager#NETWORK_PROVIDER} and {@link LocationManager#GPS_PROVIDER}
  */
-
 public class GeofenceGPSManagerImpl implements GeofenceGPSManager, LocationListener {
 
     private static final String LOG_TAG = "GeofenceGPSManagerImpl";

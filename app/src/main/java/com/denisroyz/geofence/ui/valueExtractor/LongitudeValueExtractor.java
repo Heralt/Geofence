@@ -1,19 +1,18 @@
-package com.denisroyz.geofence.validation;
+package com.denisroyz.geofence.ui.valueExtractor;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.widget.EditText;
 
 import com.denisroyz.geofence.R;
-import com.denisroyz.geofence.utils.EditTextUtil;
 
 /**
  * Created by Heralt on 09.09.2017.
  */
 
-public class LongitudeValidator extends EditTextValidator<Double> {
+public class LongitudeValueExtractor extends EditTextValueExtractor<Double> {
 
-    public LongitudeValidator(EditText editText) {
+    public LongitudeValueExtractor(EditText editText) {
         super(editText);
     }
 
@@ -27,7 +26,7 @@ public class LongitudeValidator extends EditTextValidator<Double> {
 
     @Override
     public Double getValue() {
-        return EditTextUtil.getDoubleFromEditText(getWrappedEditText());
+        return getDoubleFromEditText(getWrappedEditText());
     }
 
     private boolean isValidLongitude(Double longitude) {

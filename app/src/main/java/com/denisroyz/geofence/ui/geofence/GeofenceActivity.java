@@ -3,7 +3,6 @@ package com.denisroyz.geofence.ui.geofence;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -21,18 +20,17 @@ import com.denisroyz.geofence.dao.WifiRule;
 import com.denisroyz.geofence.service.PermissionManager;
 import com.denisroyz.geofence.service.PermissionManagerImpl;
 import com.denisroyz.geofence.utils.CollapseExpand;
-import com.denisroyz.geofence.utils.EditTextUtil;
 import com.denisroyz.geofence.utils.TextChangeWatcher;
-import com.denisroyz.geofence.validation.LatitudeValidator;
-import com.denisroyz.geofence.validation.LongitudeValidator;
-import com.denisroyz.geofence.validation.RadiusValidator;
-import com.denisroyz.geofence.validation.WifiNetworkNameValidator;
+import com.denisroyz.geofence.ui.valueExtractor.LatitudeValueExtractor;
+import com.denisroyz.geofence.ui.valueExtractor.LongitudeValueExtractor;
+import com.denisroyz.geofence.ui.valueExtractor.RadiusValueExtractor;
+import com.denisroyz.geofence.ui.valueExtractor.WifiNetworkNameValidator;
 
 public class GeofenceActivity extends AppCompatActivity implements GeofenceView, GeofenceActivityAPI{
 
-    LatitudeValidator latitudeValidator;
-    LongitudeValidator longitudeValidator;
-    RadiusValidator radiusValidator;
+    LatitudeValueExtractor latitudeValidator;
+    LongitudeValueExtractor longitudeValidator;
+    RadiusValueExtractor radiusValidator;
     WifiNetworkNameValidator wifiNetworkNameValidator;
 
     GeofencePresenter mGeofencePresenter;
@@ -146,7 +144,7 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView,
 
 
     private WifiRule readWifiRule(){
-        if (wifiNetworkNameValidator.validate(this)){
+        if (wifiNetworkNameValidator.isValueValid(this)){
             WifiRule wifiRule = new WifiRule();
             wifiRule.setWifiNetworkName(wifiNetworkNameValidator.getValue());
             return wifiRule;
@@ -156,9 +154,9 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView,
 
     private GPSRule readGPSRule(){
         boolean haveErrors = false;
-        if (!latitudeValidator.validate(this)) haveErrors = true;
-        if (!longitudeValidator.validate(this)) haveErrors = true;
-        if (!radiusValidator.validate(this)) haveErrors = true;
+        if (!latitudeValidator.isValueValid(this)) haveErrors = true;
+        if (!longitudeValidator.isValueValid(this)) haveErrors = true;
+        if (!radiusValidator.isValueValid(this)) haveErrors = true;
         if (!haveErrors){
             GPSRule gpsRule = new GPSRule();
             gpsRule.setLatLng(
@@ -235,9 +233,9 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView,
             }
         });
         wifiNetworkNameValidator = new WifiNetworkNameValidator(wifiNetworkNameRuleEditText);
-        latitudeValidator = new LatitudeValidator(gpsLatitudeRuleEditText);
-        longitudeValidator = new LongitudeValidator(gpsLongitudeRuleEditText);
-        radiusValidator = new RadiusValidator(gpsRadiusRuleEditText);
+        latitudeValidator = new LatitudeValueExtractor(gpsLatitudeRuleEditText);
+        longitudeValidator = new LongitudeValueExtractor(gpsLongitudeRuleEditText);
+        radiusValidator = new RadiusValueExtractor(gpsRadiusRuleEditText);
     }
 
 

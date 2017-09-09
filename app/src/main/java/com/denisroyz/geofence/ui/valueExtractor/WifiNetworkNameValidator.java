@@ -1,17 +1,16 @@
-package com.denisroyz.geofence.validation;
+package com.denisroyz.geofence.ui.valueExtractor;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.widget.EditText;
 
 import com.denisroyz.geofence.R;
-import com.denisroyz.geofence.utils.EditTextUtil;
 
 /**
  * Created by Heralt on 09.09.2017.
  */
 
-public class WifiNetworkNameValidator extends EditTextValidator<String> {
+public class WifiNetworkNameValidator extends EditTextValueExtractor<String> {
 
     public WifiNetworkNameValidator(EditText editText) {
         super(editText);
