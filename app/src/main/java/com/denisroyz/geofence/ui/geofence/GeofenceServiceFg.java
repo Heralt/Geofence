@@ -32,10 +32,10 @@ import static android.content.ContentValues.TAG;
 public class GeofenceServiceFg extends Service implements GeofenceReceiver.GeofenceReceiverListener {
     private static final String LOG_TAG = "GeofenceServiceFg";
 
-    GeofenceWiFiManager mGeofenceWiFiManager;
-    GeofenceGPSManager mGeofenceGPSManager;
-    UserLocationRepository mCurrentLocationRepository;
-    GeofenceReceiver mGeofenceReceiver;
+    private GeofenceWiFiManager mGeofenceWiFiManager;
+    private GeofenceGPSManager mGeofenceGPSManager;
+    private UserLocationRepository mCurrentLocationRepository;
+    private GeofenceReceiver mGeofenceReceiver;
     private Handler mHandler;
 
     private boolean mShouldStop = false;

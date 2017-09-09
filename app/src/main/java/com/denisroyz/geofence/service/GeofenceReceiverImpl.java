@@ -108,7 +108,7 @@ public class GeofenceReceiverImpl implements GeofenceReceiver, UserLocationRepos
      * el2 End altitude in meters
      * @return Distance in Meters
      */
-    public static double distance(double lat1, double lat2, double lon1,
+    private double distance(double lat1, double lat2, double lon1,
                                   double lon2) {
 
         final int R = 6371; // Radius of the earth
@@ -119,9 +119,7 @@ public class GeofenceReceiverImpl implements GeofenceReceiver, UserLocationRepos
                 + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double distance = R * c * 1000; // convert to meters
-
-        return distance;
+        return R * c * 1000;// convert to meters
     }
     @Override
     public void addGeofenceReceiverListener(GeofenceReceiverListener geofenceReceiverListener) {

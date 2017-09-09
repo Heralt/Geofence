@@ -1,13 +1,9 @@
 package com.denisroyz.geofence;
 
-/**
- * Created by Heralt on 21.11.2016.
- */
-
 public class Const {
 
 
-    public static long UPDATE_FREQ = 1000;
+    public static final long UPDATE_FREQ = 1000;
 
     public interface PREFS {
         String PREFS_GEOFENCE_RULE = "com.denisroyz.geofence.rule.prefs";

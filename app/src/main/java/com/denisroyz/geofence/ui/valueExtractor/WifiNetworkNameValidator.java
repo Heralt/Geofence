@@ -6,10 +6,6 @@ import android.widget.EditText;
 
 import com.denisroyz.geofence.R;
 
-/**
- * Created by Heralt on 09.09.2017.
- */
-
 public class WifiNetworkNameValidator extends EditTextValueExtractor<String> {
 
     public WifiNetworkNameValidator(EditText editText) {
@@ -21,7 +17,7 @@ public class WifiNetworkNameValidator extends EditTextValueExtractor<String> {
     protected String validateForError(Context context) {
         String value = getValue();
         if (isValidWifiName(value)) return null;
-        return context.getString(R.string.wifi_network_name);
+        return context.getString(R.string.wifi_network_name_error);
     }
 
     @Override

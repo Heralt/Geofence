@@ -15,7 +15,7 @@ public class CollapseExpand {
     private static final int DURATION = 250;
 
     public static void expand(final View v) {
-        if (v.getVisibility()==View.VISIBLE) return;;
+        if (v.getVisibility()==View.VISIBLE) return;
         v.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         final int targetHeight = v.getMeasuredHeight();
 

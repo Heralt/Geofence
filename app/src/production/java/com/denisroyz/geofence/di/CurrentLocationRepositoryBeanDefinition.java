@@ -4,7 +4,7 @@ import com.denisroyz.geofence.repository.UserLocationRepository;
 import com.denisroyz.geofence.repository.UserLocationRepositoryImpl;
 
 /**
- * Created by Heralt on 06.09.2017.
+ * Defines, how to create {@link UserLocationRepository} bean
  */
 public class CurrentLocationRepositoryBeanDefinition implements BeanDefinition<UserLocationRepository> {
     @Override

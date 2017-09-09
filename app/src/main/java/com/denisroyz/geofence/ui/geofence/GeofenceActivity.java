@@ -28,25 +28,24 @@ import com.denisroyz.geofence.ui.valueExtractor.WifiNetworkNameValidator;
 
 public class GeofenceActivity extends AppCompatActivity implements GeofenceView, GeofenceActivityAPI{
 
-    LatitudeValueExtractor latitudeValidator;
-    LongitudeValueExtractor longitudeValidator;
-    RadiusValueExtractor radiusValidator;
-    WifiNetworkNameValidator wifiNetworkNameValidator;
+    private LatitudeValueExtractor latitudeValidator;
+    private LongitudeValueExtractor longitudeValidator;
+    private RadiusValueExtractor radiusValidator;
+    private WifiNetworkNameValidator wifiNetworkNameValidator;
 
-    GeofencePresenter mGeofencePresenter;
-    PermissionManager mPermissionManager;
+    private GeofencePresenter mGeofencePresenter;
+    private PermissionManager mPermissionManager;
 
-    ToggleButton toggleButton;
-    TextView statusTextView;
+    private ToggleButton toggleButton;
+    private TextView statusTextView;
 
-    Button saveConfigurationButton;
-    View requestPermissionButton;
-    View layoutGeofenceStatus;
+    private Button saveConfigurationButton;
+    private View requestPermissionButton;
 
-    EditText wifiNetworkNameRuleEditText;
-    EditText gpsLatitudeRuleEditText;
-    EditText gpsLongitudeRuleEditText;
-    EditText gpsRadiusRuleEditText;
+    private EditText wifiNetworkNameRuleEditText;
+    private EditText gpsLatitudeRuleEditText;
+    private EditText gpsLongitudeRuleEditText;
+    private EditText gpsRadiusRuleEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,7 +190,6 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView,
         gpsRadiusRuleEditText = findViewById(R.id.geofence_configuration_gps_radius);
         saveConfigurationButton = findViewById(R.id.geofence_configuration_save_button);
         requestPermissionButton = findViewById(R.id.geofence_permission_lay);
-        layoutGeofenceStatus = findViewById(R.id.geofence_status_lay);
         statusTextView = findViewById(R.id.status_text_view);
         toggleButton = findViewById(R.id.geofence_sensors_toggle);
         toggleButton.setOnClickListener(new View.OnClickListener() {

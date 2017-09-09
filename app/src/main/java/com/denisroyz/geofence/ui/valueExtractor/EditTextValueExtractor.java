@@ -12,7 +12,7 @@ import android.widget.EditText;
  */
 public abstract class EditTextValueExtractor<T> {
 
-    private EditText editText;
+    private final EditText editText;
 
     protected EditText getWrappedEditText(){
         return editText;

@@ -6,10 +6,6 @@ import android.widget.EditText;
 
 import com.denisroyz.geofence.R;
 
-/**
- * Created by Heralt on 09.09.2017.
- */
-
 public class LatitudeValueExtractor extends EditTextValueExtractor<Double> {
 
     public LatitudeValueExtractor(EditText editText) {

@@ -2,9 +2,7 @@ package com.denisroyz.geofence.dao;
 
 import java.io.Serializable;
 
-/**
- * Created by Heralt on 06.09.2017.
- */
+
 public class GPSRule implements Serializable {
 
     private static final long serialVersionUID = 1L;

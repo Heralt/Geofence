@@ -9,7 +9,6 @@ import com.denisroyz.geofence.ui.geofence.GeofenceServiceFg;
 /**
  * Created by Heralt on 05.09.2017.
  */
-
 public class GeofenceManagerImpl implements GeofenceManager {
 
     private Context context;

@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -25,9 +24,9 @@ public class GeofenceGPSManagerImpl implements GeofenceGPSManager, LocationListe
 
     private static final int MIN_TIME = 0;
     private static final int MIN_DISTANCE = 0;
-    LocationManager locationManager;
-    Context context;
-    Location mLastLocation;
+    private LocationManager locationManager;
+    private Context context;
+    private Location mLastLocation;
 
 
     public GeofenceGPSManagerImpl(Context context) {

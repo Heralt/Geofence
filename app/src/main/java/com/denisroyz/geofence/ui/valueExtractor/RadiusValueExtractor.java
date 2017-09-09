@@ -6,10 +6,6 @@ import android.widget.EditText;
 
 import com.denisroyz.geofence.R;
 
-/**
- * Created by Heralt on 09.09.2017.
- */
-
 public class RadiusValueExtractor extends EditTextValueExtractor<Double> {
 
     public RadiusValueExtractor(EditText editText) {

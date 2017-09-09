@@ -11,7 +11,7 @@ import android.net.wifi.WifiManager;
  */
 public class GeofenceWiFiManagerImpl implements GeofenceWiFiManager {
 
-    WifiManager mWifiManager;
+    private WifiManager mWifiManager;
 
     public GeofenceWiFiManagerImpl(WifiManager wifiManager){
         this.mWifiManager = wifiManager;
