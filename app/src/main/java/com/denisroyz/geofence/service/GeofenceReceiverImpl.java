@@ -1,35 +1,29 @@
 package com.denisroyz.geofence.service;
 
-import android.location.Location;
-
-import com.denisroyz.geofence.model.GPSRule;
-import com.denisroyz.geofence.model.UserLocation;
-import com.denisroyz.geofence.model.WifiRule;
-import com.denisroyz.geofence.repository.CurrentLocationRepository;
+import com.denisroyz.geofence.dao.GPSRule;
+import com.denisroyz.geofence.dao.UserLocation;
+import com.denisroyz.geofence.dao.WifiRule;
+import com.denisroyz.geofence.repository.UserLocationRepository;
 import com.denisroyz.geofence.repository.GeofenceRuleRepository;
-import com.denisroyz.geofence.repository.RuleRepositoryUpdateListener;
-import com.denisroyz.geofence.repository.UserLocationRepositoryUpdateListener;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by Heralt on 06.09.2017.
  */
 
-public class GeofenceReceiverImpl implements GeofenceReceiver, UserLocationRepositoryUpdateListener, RuleRepositoryUpdateListener{
+public class GeofenceReceiverImpl implements GeofenceReceiver, UserLocationRepository.UserLocationRepositoryUpdateListener, GeofenceRuleRepository.RuleRepositoryUpdateListener {
 
     private boolean mInside = false;
 
     private Set<GeofenceReceiverListener> listeners = new HashSet<>();
     private Set<GeofenceReceiverListener> newListeners = new HashSet<>();
 
-    private CurrentLocationRepository mCurrentLocationRepository;
+    private UserLocationRepository mCurrentLocationRepository;
     private GeofenceRuleRepository mGeofenceRuleRepository;
 
-    public GeofenceReceiverImpl(CurrentLocationRepository currentLocationRepository, GeofenceRuleRepository geofenceRuleRepository){
+    public GeofenceReceiverImpl(UserLocationRepository currentLocationRepository, GeofenceRuleRepository geofenceRuleRepository){
         this.mCurrentLocationRepository = currentLocationRepository;
         this.mGeofenceRuleRepository = geofenceRuleRepository;
         mGPSRule = geofenceRuleRepository.getGpsRule();
@@ -85,9 +79,7 @@ public class GeofenceReceiverImpl implements GeofenceReceiver, UserLocationRepos
                 mUserLocation.getLatitude()!=null
                 &&mUserLocation.getLongitude()!=null
                 &&mGPSRule!=null
-                &&mGPSRule.getLat()!=null
-                &&mGPSRule.getLon()!=null
-                &&mGPSRule.getRadius()!=null
+                &&mGPSRule.isInitialized()
                 &&ensureGPSPointIsInRadius(mUserLocation.getLatitude(), mUserLocation.getLongitude(), mGPSRule.getLat(), mGPSRule.getLon(), mGPSRule.getRadius())
         );
     }

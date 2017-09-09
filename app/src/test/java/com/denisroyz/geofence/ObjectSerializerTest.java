@@ -1,7 +1,7 @@
 package com.denisroyz.geofence;
 
-import com.denisroyz.geofence.model.GPSRule;
-import com.denisroyz.geofence.model.WifiRule;
+import com.denisroyz.geofence.dao.GPSRule;
+import com.denisroyz.geofence.dao.WifiRule;
 import com.denisroyz.geofence.service.ObjectSerializer;
 
 import org.junit.Before;
@@ -35,8 +35,7 @@ public class ObjectSerializerTest {
     @Test
     public void gps_rule_with_values_serialize_deserialize_is_correct() throws Exception {
         GPSRule gpsRule = new GPSRule();
-        gpsRule.setLon(13);
-        gpsRule.setLat(14.3);
+        gpsRule.setLatLng(13, 14.3);
         gpsRule.setRadius(0.01);
         String string =  objectSerializer.writeToString(gpsRule);
         Object object = objectSerializer.readFromString(string);

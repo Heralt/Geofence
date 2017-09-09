@@ -5,22 +5,23 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.denisroyz.geofence.Const;
-import com.denisroyz.geofence.model.GPSRule;
-import com.denisroyz.geofence.model.WifiRule;
+import com.denisroyz.geofence.dao.GPSRule;
+import com.denisroyz.geofence.dao.UserLocation;
+import com.denisroyz.geofence.dao.WifiRule;
 import com.denisroyz.geofence.service.ObjectSerializer;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
 /**
- * Created by Heralt on 06.09.2017.
+ * Production implementation of {@link GeofenceRuleRepository}.
+ * Stores {@link UserLocation} object inside {@link SharedPreferences}.
+ * This implementation can store only one instance of each rule.
+ * Notifies listeners once this object is changed.
  */
-
 public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
 
     private static final String LOG_TAG = "RuleRepositoryImpl";
@@ -42,8 +43,6 @@ public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
 
     @Override
     public GPSRule getGpsRule() {
-        //TODO rework default object
-
         Object object = readPref(GPS_RULE_KEY);
         if (object!=null && object instanceof GPSRule) return (GPSRule) object;
         return new GPSRule();
@@ -51,7 +50,6 @@ public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
 
     @Override
     public WifiRule getWifiRule() {
-        //TODO rework default object
         Object object = readPref(WIFI_RULE_KEY);
         if (object!=null && object instanceof WifiRule) return (WifiRule) object;
         return new WifiRule();
@@ -71,7 +69,6 @@ public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
         return saved;
     }
 
-    //THIS should be done in other thread
     private void notifyGpsRuleUpdated(GPSRule gpsRule) {
         for (RuleRepositoryUpdateListener listener: listeners){
             listener.onGpsRuleUpdated(gpsRule);
@@ -79,7 +76,6 @@ public class GeofenceRuleRepositoryImpl implements GeofenceRuleRepository {
 
     }
 
-    //THIS should be done in other thread
     private void notifyWifiRuleUpdated(WifiRule wifiRule) {
         for (RuleRepositoryUpdateListener listener: listeners){
             listener.onWifiRuleUpdated(wifiRule);

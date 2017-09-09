@@ -15,8 +15,8 @@ import com.denisroyz.geofence.Const;
 import com.denisroyz.geofence.GeofenceApplication;
 import com.denisroyz.geofence.R;
 import com.denisroyz.geofence.di.BeanTags;
-import com.denisroyz.geofence.model.UserLocation;
-import com.denisroyz.geofence.repository.CurrentLocationRepository;
+import com.denisroyz.geofence.dao.UserLocation;
+import com.denisroyz.geofence.repository.UserLocationRepository;
 import com.denisroyz.geofence.service.GeofenceGPSManager;
 import com.denisroyz.geofence.service.GeofenceReceiver;
 import com.denisroyz.geofence.service.GeofenceReceiverListener;
@@ -33,7 +33,7 @@ public class GeofenceServiceFg extends Service implements GeofenceReceiverListen
 
     GeofenceWiFiManager mGeofenceWiFiManager;
     GeofenceGPSManager mGeofenceGPSManager;
-    CurrentLocationRepository mCurrentLocationRepository;
+    UserLocationRepository mCurrentLocationRepository;
     GeofenceReceiver mGeofenceReceiver;
     private Handler mHandler;
 
@@ -59,7 +59,7 @@ public class GeofenceServiceFg extends Service implements GeofenceReceiverListen
 
     public void inject(){
         mHandler = new Handler();
-        mCurrentLocationRepository = (CurrentLocationRepository) GeofenceApplication.getApplicationDIContext().getBean(BeanTags.USER_LOCATION_REPOSITORY);
+        mCurrentLocationRepository = (UserLocationRepository) GeofenceApplication.getApplicationDIContext().getBean(BeanTags.USER_LOCATION_REPOSITORY);
         mGeofenceWiFiManager = (GeofenceWiFiManager)  GeofenceApplication.getApplicationDIContext().getBean(BeanTags.GEOFENCE_WIFI_MANAGER);
         mGeofenceGPSManager = (GeofenceGPSManager)  GeofenceApplication.getApplicationDIContext().getBean(BeanTags.GEOFENCE_GPS_MANAGER);
         mGeofenceReceiver = (GeofenceReceiver)  GeofenceApplication.getApplicationDIContext().getBean(BeanTags.GEOFENCE_RECEIVER);
@@ -138,7 +138,7 @@ public class GeofenceServiceFg extends Service implements GeofenceReceiverListen
             userLocation.setLongitude(location.getLongitude());
         }
         Log.i(LOG_TAG, "updated current location "+userLocation.toString());
-        mCurrentLocationRepository.updateCurrentLocation(userLocation);
+        mCurrentLocationRepository.updateUserLocation(userLocation);
 
     }
 

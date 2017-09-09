@@ -16,21 +16,25 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.denisroyz.geofence.R;
-import com.denisroyz.geofence.model.GPSRule;
-import com.denisroyz.geofence.model.WifiRule;
+import com.denisroyz.geofence.dao.GPSRule;
+import com.denisroyz.geofence.dao.WifiRule;
 import com.denisroyz.geofence.service.PermissionManager;
 import com.denisroyz.geofence.service.PermissionManagerImpl;
 import com.denisroyz.geofence.utils.CollapseExpand;
+import com.denisroyz.geofence.utils.EditTextUtil;
 import com.denisroyz.geofence.utils.TextChangeWatcher;
-import com.denisroyz.geofence.validation.GPSRuleObjectValidator;
-import com.denisroyz.geofence.validation.ObjectValidatorError;
-import com.denisroyz.geofence.validation.ObjectValidatorResult;
-import com.denisroyz.geofence.validation.WifiRuleObjectValidator;
+import com.denisroyz.geofence.validation.LatitudeValidator;
+import com.denisroyz.geofence.validation.LongitudeValidator;
+import com.denisroyz.geofence.validation.RadiusValidator;
+import com.denisroyz.geofence.validation.WifiNetworkNameValidator;
 
 public class GeofenceActivity extends AppCompatActivity implements GeofenceView, GeofenceActivityAPI{
 
-    GPSRuleObjectValidator gpsRuleObjectValidator;
-    WifiRuleObjectValidator wifiRuleObjectValidator;
+    LatitudeValidator latitudeValidator;
+    LongitudeValidator longitudeValidator;
+    RadiusValidator radiusValidator;
+    WifiNetworkNameValidator wifiNetworkNameValidator;
+
     GeofencePresenter mGeofencePresenter;
     PermissionManager mPermissionManager;
 
@@ -121,12 +125,12 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView,
     }
 
     private void onSaveConfigurationButtonClick(){
-        ObjectValidatorResult<GPSRule> gpsRule = readGPSRule();
-        ObjectValidatorResult<WifiRule> wifiRule = readWifiRule();
-        if (gpsRule.isValid()&&wifiRule.isValid()){
+        GPSRule gpsRule = readGPSRule();
+        WifiRule wifiRule = readWifiRule();
+        if (gpsRule!=null&&wifiRule!=null){
             saveConfigurationButton.setEnabled(false);
-            mGeofencePresenter.save(gpsRule.getObject());
-            mGeofencePresenter.save(wifiRule.getObject());
+            mGeofencePresenter.save(gpsRule);
+            mGeofencePresenter.save(wifiRule);
             hideKeyboard();
         }
 
@@ -141,36 +145,30 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView,
     }
 
 
-    private ObjectValidatorResult<WifiRule> readWifiRule(){
-        WifiRule wifiRule = new WifiRule();
-        if (!wifiNetworkNameRuleEditText.getText().toString().isEmpty())
-            wifiRule.setWifiNetworkName(wifiNetworkNameRuleEditText.getText().toString());
-        ObjectValidatorResult<WifiRule> validatedWifiRule = wifiRuleObjectValidator.validateObject(this, wifiRule);
-        processValidationError(wifiNetworkNameRuleEditText, validatedWifiRule.getError(WifiRuleObjectValidator.FIELD_NETWORK_NAME));
-        return validatedWifiRule;
-    }
-
-    private ObjectValidatorResult<GPSRule> readGPSRule(){
-        GPSRule gpsRule = new GPSRule();
-        if (!gpsLatitudeRuleEditText.getText().toString().isEmpty())
-            gpsRule.setLat( Double.parseDouble(gpsLatitudeRuleEditText.getText().toString()));
-        if (!gpsLongitudeRuleEditText.getText().toString().isEmpty())
-            gpsRule.setLon( Double.parseDouble(gpsLongitudeRuleEditText.getText().toString()));
-        if (!gpsRadiusRuleEditText.getText().toString().isEmpty())
-            gpsRule.setRadius( Double.parseDouble(gpsRadiusRuleEditText.getText().toString()));
-        ObjectValidatorResult<GPSRule> validatedGPSRule = gpsRuleObjectValidator.validateObject(this, gpsRule);
-        processValidationError(gpsLatitudeRuleEditText, validatedGPSRule.getError(GPSRuleObjectValidator.FIELD_LAT));
-        processValidationError(gpsLongitudeRuleEditText, validatedGPSRule.getError(GPSRuleObjectValidator.FIELD_LON));
-        processValidationError(gpsRadiusRuleEditText, validatedGPSRule.getError(GPSRuleObjectValidator.FIELD_RADIUS));
-        return validatedGPSRule;
-    }
-
-    private void processValidationError(EditText editText,@Nullable  ObjectValidatorError objectValidatorError){
-        if (objectValidatorError==null){
-            editText.setError(null);
-        } else {
-            editText.setError(objectValidatorError.getMessage());
+    private WifiRule readWifiRule(){
+        if (wifiNetworkNameValidator.validate(this)){
+            WifiRule wifiRule = new WifiRule();
+            wifiRule.setWifiNetworkName(wifiNetworkNameValidator.getValue());
+            return wifiRule;
         }
+        return null;
+    }
+
+    private GPSRule readGPSRule(){
+        boolean haveErrors = false;
+        if (!latitudeValidator.validate(this)) haveErrors = true;
+        if (!longitudeValidator.validate(this)) haveErrors = true;
+        if (!radiusValidator.validate(this)) haveErrors = true;
+        if (!haveErrors){
+            GPSRule gpsRule = new GPSRule();
+            gpsRule.setLatLng(
+                    latitudeValidator.getValue(),
+                    longitudeValidator.getValue()
+            );
+            gpsRule.setRadius(radiusValidator.getValue());
+            return gpsRule;
+        }
+        return null;
     }
 
     private void onToggleButtonClick(){
@@ -181,8 +179,6 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView,
     private void initDependencies(){
         mGeofencePresenter = new GeofencePresenterImpl(this, this);
         mPermissionManager = new PermissionManagerImpl();
-        gpsRuleObjectValidator = new GPSRuleObjectValidator();
-        wifiRuleObjectValidator = new WifiRuleObjectValidator();
     }
 
 
@@ -238,6 +234,10 @@ public class GeofenceActivity extends AppCompatActivity implements GeofenceView,
                 return false;
             }
         });
+        wifiNetworkNameValidator = new WifiNetworkNameValidator(wifiNetworkNameRuleEditText);
+        latitudeValidator = new LatitudeValidator(gpsLatitudeRuleEditText);
+        longitudeValidator = new LongitudeValidator(gpsLongitudeRuleEditText);
+        radiusValidator = new RadiusValidator(gpsRadiusRuleEditText);
     }
 
 

@@ -1,4 +1,4 @@
-package com.denisroyz.geofence.model;
+package com.denisroyz.geofence.dao;
 
 /**
  * Created by Heralt on 07.09.2017.

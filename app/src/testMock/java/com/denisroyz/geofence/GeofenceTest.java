@@ -1,10 +1,10 @@
 package com.denisroyz.geofence;
 
-import com.denisroyz.geofence.model.GPSRule;
-import com.denisroyz.geofence.model.UserLocation;
-import com.denisroyz.geofence.model.WifiRule;
-import com.denisroyz.geofence.repository.CurrentLocationRepository;
-import com.denisroyz.geofence.repository.CurrentLocationRepositoryImpl;
+import com.denisroyz.geofence.dao.GPSRule;
+import com.denisroyz.geofence.dao.UserLocation;
+import com.denisroyz.geofence.dao.WifiRule;
+import com.denisroyz.geofence.repository.UserLocationRepository;
+import com.denisroyz.geofence.repository.UserLocationRepositoryImpl;
 import com.denisroyz.geofence.repository.GeofenceRuleRepository;
 import com.denisroyz.geofence.repository.GeofenceRuleRepositoryImpl;
 import com.denisroyz.geofence.service.GeofenceReceiver;
@@ -18,13 +18,13 @@ import org.junit.Test;
 public class GeofenceTest {
 
     private GeofenceReceiver geofenceReceiver;
-    private CurrentLocationRepository currentLocationRepository;
+    private UserLocationRepository currentLocationRepository;
     private GeofenceRuleRepository ruleRepository;
 
 
     @Before
     public void init(){
-        currentLocationRepository = new CurrentLocationRepositoryImpl();
+        currentLocationRepository = new UserLocationRepositoryImpl();
         ruleRepository = new GeofenceRuleRepositoryImpl();
         geofenceReceiver = new GeofenceReceiverImpl(currentLocationRepository, ruleRepository);
     }
@@ -63,8 +63,7 @@ public class GeofenceTest {
         userLocation.setLongitude(lon);
         userLocation.setWifiNetworkName(wifi);
         GPSRule gpsRule = new GPSRule();
-        gpsRule.setLat(desiredLat);
-        gpsRule.setLon(desiredLon);
+        gpsRule.setLatLng(desiredLat,desiredLon);
         gpsRule.setRadius(radius);
         WifiRule wifiRule = new WifiRule();
         wifiRule.setWifiNetworkName(desiredWifi);
@@ -76,7 +75,7 @@ public class GeofenceTest {
         });
         ruleRepository.saveGpsRule(gpsRule);
         ruleRepository.saveWifiRule(wifiRule);
-        currentLocationRepository.updateCurrentLocation(userLocation);
+        currentLocationRepository.updateUserLocation(userLocation);
         return geofenceReceiver.getGeoFenceStatus();
     }
 }

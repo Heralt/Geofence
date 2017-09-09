@@ -1,7 +1,7 @@
 package com.denisroyz.geofence.repository;
 
-import com.denisroyz.geofence.model.GPSRule;
-import com.denisroyz.geofence.model.WifiRule;
+import com.denisroyz.geofence.dao.GPSRule;
+import com.denisroyz.geofence.dao.WifiRule;
 
 import java.util.HashSet;
 import java.util.Set;

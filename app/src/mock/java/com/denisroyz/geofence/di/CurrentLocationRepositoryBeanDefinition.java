@@ -1,17 +1,17 @@
 package com.denisroyz.geofence.di;
 
 
-import com.denisroyz.geofence.repository.CurrentLocationRepository;
-import com.denisroyz.geofence.repository.CurrentLocationRepositoryImpl;
+import com.denisroyz.geofence.repository.UserLocationRepository;
+import com.denisroyz.geofence.repository.UserLocationRepositoryImpl;
 
 /**
  * Created by Heralt on 06.09.2017.
  */
 
-public class CurrentLocationRepositoryBeanDefinition implements BeanDefinition<CurrentLocationRepository> {
+public class CurrentLocationRepositoryBeanDefinition implements BeanDefinition<UserLocationRepository> {
     @Override
-    public CurrentLocationRepository createBean(DIContext diContext) {
-        return new CurrentLocationRepositoryImpl();
+    public UserLocationRepository createBean(DIContext diContext) {
+        return new UserLocationRepositoryImpl();
     }
 
     @Override
