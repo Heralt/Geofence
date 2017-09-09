@@ -49,4 +49,35 @@ wifi network name.
 
 # Usage 
 
-TBD
+App supports multiwindow.
+
+To create geofence rules fill "inputs":
+1) Enter geofence zone Wifi network name
+2) Enter geofence zone center Lattitude
+3) Enter geofence zone center Longitude
+4) Enter radius of geofence zone
+5) Press button "Save new geofence configuration
+
+
+<img align="left" height="400"   src="https://github.com/denis-royz/Geofence/blob/develop/screanshots/screanshot1.png">
+
+To start geofence search - click switch button "ON/OFF"
+While geofence search is enabled - text under button "ON/OFF" will reliably show, are you in geofence area.
+If geofence search is not enabled - text under button "ON/OFF" will show last information he have.
+
+To start geofence search - click switch button "ON/OFF"
+While geofence search is enabled - text under button "ON/OFF" will reliably show, are you in geofence area.
+If geofence search is not enabled - text under button "ON/OFF" will show last information he have.
+
+<br /><br /><br /><br /><br /><br />
+---
+<img align="left" height="400"   src="https://github.com/denis-royz/Geofence/blob/develop/screanshots/screanshot4.png">
+While geofence search is enabled - you can see notification in notification bar, which contain information, 
+are you in geofence area, and how long you last time (entered/leaved) geofence area.
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+---
+<img align="left" height="400"  src="https://github.com/denis-royz/Geofence/blob/develop/screanshots/screanshot2.png">
+If you are using android M+ device, and you have not provided Location permission to this app - you will find out
+card with red text, which requests you to enables Location permission.
+By clocking this card you will be requested to allow app to use Location permission.
